@@ -585,7 +585,7 @@ class PPOTrainer(BaseTrainer):
 
                 if remove_padding and self.tokenizer.eos_token_id in output:
                     pad_mask = output == self.tokenizer.eos_token_id
-                    pad_start = torch.nonzero(pad_mask, as_tuple=False)[0, 0].item()
+                    pad_start = torch.nonzero(pad_mask, as_tuple=False)[-1, 0].item()
                     output = output[: pad_start + 1]  # keep the eos token at the end
 
                 outputs.append(output)
